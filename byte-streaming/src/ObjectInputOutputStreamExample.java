@@ -1,54 +1,38 @@
 import java.io.*;
-
 /**
- * Working of objectInputStream and objectoutputStream
- * 1. The objectInputStream is mainly used to read data/object written by the objectOutputStream.
- * 2. Basically, the objectOutputStream converts or writes java objects into corresponding streams(Outpur stream).
+ * Working of ObjectInputStream and ObjectOutputStream
+ * 1. The ObjectInputStream is mainly used to read data/object written by the ObjectOutputStream.
+ * 2. Basically, the ObjectOutputStream converts or writes Java objects into corresponding streams(Output stream).
  *    Those converted streams can be stored in files or transferred through networks.
- *    This is known as 'Sterilization'.
- * 3. Now, if we need to read those objects, we will use the objectStream that will
- *    convert the streams back to corresponding objects. This is known as 'Deserilization'
+ *    This is known as `Serialization`.
+ * 3. Now, if we need to read those objects, we will use the ObjectInputStream that will
+ *    convert the streams back to corresponding objects. This is known as `Deserialization`.
  */
 
-class Student implements Serializable {
-    String name;
-    int id;
 
-    public Student(String name, int id) {
-        this.name = name;
-        this.id = id;
-    }
 
-    @Override
-    public String toString() {
-        return "Student{" +
-                "name='" + name + '\'' +
-                ", id=" + id +
-                '}';
-    }
-}
-
-//Stream is nothing but seq of elements or flow of data or pipe of data.
+//Stream is nothing but seq of elements or flow of data or pipe of data
 //FileOutputStream -> writes into a file.
-//ObjectOutputStream -> writes to object output stream.
+//ObjectOutputStream -> writes to Object Output stream.
 
-//Input and Output that means Read and Write.
+//Input and Output that means Read and Write
 //Input -> read data
 //Output -> write data
 
 /*
-  The goal of this program is to write the object using objectOutputStream
-  and FileOutputStream into a file and then read all the object from the
-  file using objectInputSteam and FileInputStream.
+The goal of this program is to write the object using ObjectOutputStream
+and FileOutputStream into a file and then read all the object from the
+file using ObjectInputStream and FileInputStream
  */
+
 public class ObjectInputOutputStreamExample {
-    public static void main(String[] args) throws IOException, ClassCastException, InterruptedException {
+    public static void main(String[] args) throws IOException, ClassNotFoundException, InterruptedException {
 
         Integer number = 100;
         String msg = "Hello Input/Output Stream";
         Student student = new Student("Aarti", 100);
 
-        OutputStream fileOutputStream = new FileOutputStream("C:\\Users\\Dell\\IdeaProjects\\java-io-concepts\\byte-streaming\\src\\object.txt");
+        OutputStream fileOutputStream = new FileOutputStream("C:\\Users\\Dell\\IdeaProjects\\java-io-concepts\\byte-streaming\\src\\Object.txt");
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
 
         objectOutputStream.writeObject(number);
@@ -57,18 +41,17 @@ public class ObjectInputOutputStreamExample {
 
         Thread.sleep(3000);
 
-        InputStream fileInputStream = new FileInputStream("C:\\Users\\Dell\\IdeaProjects\\java-io-concepts\\byte-streaming\\src\\object.txt");
+        InputStream fileInputStream = new FileInputStream("C:\\Users\\Dell\\IdeaProjects\\java-io-concepts\\byte-streaming\\src\\Object.txt");
         ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
-        //this objectInputStream will read objects from specified fileInputStream
+        //this ObjectInputStream will read objects from specified fileInputStream.
 
         Integer integerObjectFromFile = (Integer) objectInputStream.readObject();
         String stringObjectFromFile = (String) objectInputStream.readObject();
         Student studentObjectFromFile = (Student) objectInputStream.readObject();
-        System.out.println("integerObjectFromFile : "+integerObjectFromFile);
-        System.out.println("stringObjectFromFile : "+stringObjectFromFile);
-        System.out.println("studentObjectFromFile : "+studentObjectFromFile);
 
+        System.out.println("integerObjectFromFile : "+ integerObjectFromFile);
+        System.out.println("stringObjectFromFile : "+ stringObjectFromFile);
+        System.out.println("studentObjectFromFile : "+ studentObjectFromFile);
 
     }
-
-
+}
