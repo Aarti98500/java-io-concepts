@@ -13,9 +13,15 @@ public class BufferedReaderWriterExample {
             try(FileWriter fileWriter = new FileWriter("C:\\Users\\Dell\\IdeaProjects\\java-io-concepts\\character-streaming\\src\\output.txt");
                 BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
                 ) {
+                bufferedWriter.write(charsFromInputFile);
+                System.out.println("buffer writer done with writing.");
 
 
+            }catch (IOException ioException){
+                System.out.println(ioException.getMessage());
             }
+        }catch (IOException ioException){
+            System.out.println(ioException.getMessage());
         }
 
     }
